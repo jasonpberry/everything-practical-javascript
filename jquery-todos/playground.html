@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+    
+    <script>
+        // debugger;
+        
+        // Example showing binding some parameters
+        var sum = function(a, b) {
+          return a + b;
+        };
+        
+        var add5 = sum.bind(null, 5);
+        console.log(add5(10));
+        
+        // 
+        
+        var add6 = sum.bind(null, 6);
+        console.log('var add6 is just a function. We set this as null, but add 10 -> ' , add6);
+
+
+        var add6 = add6(10);
+        console.log(add6)        
+
+        // debugger;
+        // var Button = function(content,somethingElse) { 
+        //   if(!somethingElse) {
+        //       somethingElse = 'default of something else';
+        //   }
+        //   this.content = content;
+        //   this.somethingElse = somethingElse;
+        // };
+        // Button.prototype.click = function() {
+        //   console.log(this.content + ' clicked' , ' and im the something else -> ' + this.somethingElse);
+        // }
+        
+        // var myButton = new Button('OK');
+        // myButton.click();
+        
+        // // console.log('myButton.click is just a function ---> ' , myButton.click);
+        
+        // var looseClick = myButton.click;
+        // looseClick(); // not bound, 'this' is not myButton - it is the global object
+        
+        // var boundClick = myButton.click.bind(myButton);
+        // boundClick(); // bound, 'this' is myButton        
+        
+        // console.log('-----------------');
+        
+        
+        // // build the function constructor
+        // var Something = function(param) {
+        //     this.param = param;
+        // }
+        
+        // // add a click function to the function we constructed
+        // Something.prototype.click = function()  {
+        //     console.log(this.param + ' was clicked');
+        // };
+        
+        // // create a new var using constructor
+        // var mySomething = new Something('OK');
+        // // call the click function on the constructor
+        // mySomething.click();
+
+        // // create a new var and assign it the click function - its just a function at this point
+        // var looseSomething = mySomething.click;
+
+        // // lets call the function. which has 'this' pointing to the window object where we have no this.param
+        // console.log('looseSomething is just the function below that variable looseSomething above stored');
+        // console.log('and printed below in the console');
+        // console.log(looseSomething);
+        // looseSomething();
+        // console.log('calling looseSomething had no THIS attached to it and shown above');
+        
+        // // lets create a new var using the click function and bind some data to it
+        // var boundSomething = mySomething.click.bind(mySomething);
+        // boundSomething();
+        // // now that we bound mySomething to boundSomething this is now defined.
+        
+        
+        
+        
+    </script>
+</html>
