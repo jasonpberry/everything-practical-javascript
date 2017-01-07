@@ -58,7 +58,6 @@ jQuery(function ($) {
 			this.todoTemplate = Handlebars.compile($('#todo-template').html());
 			this.footerTemplate = Handlebars.compile($('#footer-template').html());
 			this.bindEvents();
-			debugger;
 			new Router({
 				'/:filter': function (filter) {
 					// debugger;
@@ -112,6 +111,7 @@ jQuery(function ($) {
 			});
 		},
 		create: function(e) {
+			// debugger;
 			console.log('im in the create function');
 			// console.log('this is ---> ' , this);
 			var input = $(e.target);
