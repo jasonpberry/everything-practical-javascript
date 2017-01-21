@@ -99,7 +99,7 @@ jQuery(function ($) {
 			$('#footer').toggle(todoCount > 0).html(template);
 		},
 		toggleAll: function (e) {
-			console.log('hi', e);
+			// console.log('hi', e);
 			var isChecked = $(e.target).prop('checked');
 
 			this.todos.forEach(function (todo) {
@@ -130,7 +130,7 @@ jQuery(function ($) {
 			return this.todos;
 		},
 		destroyCompleted: function () {
-			console.log('destory them');
+			// console.log('destory them');
 			this.todos = this.getActiveTodos();
 			this.filter = 'all';
 			this.render();
@@ -144,7 +144,7 @@ jQuery(function ($) {
 
 			while (i--) {
 				if (todos[i].id === id) {
-					console.log(i);
+					// console.log(i);
 					return i;
 				}
 			}
@@ -188,6 +188,13 @@ jQuery(function ($) {
 		update: function (e) {
 			var el = e.target;
 			var $el = $(el);
+
+			// console.log('el');
+			// console.dir(el);
+			// console.log('---vs----');
+			// console.log('$el');
+			// console.dir($el);
+
 			var val = $el.val().trim();
 
 			if (!val) {
@@ -203,6 +210,8 @@ jQuery(function ($) {
 
 			this.render();
 		},
+		
+		
 		destroy: function (e) {
 			this.todos.splice(this.indexFromEl(e.target), 1);
 			this.render();
