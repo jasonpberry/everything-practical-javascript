@@ -1,3 +1,0 @@
-# everything-practical-javascript
-
-    changes...
