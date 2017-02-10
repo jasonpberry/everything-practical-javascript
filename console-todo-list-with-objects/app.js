@@ -4,15 +4,15 @@
 		todos: this.todos || [],
 
 		init: function() {
-			console.log('App Started');
-			console.log('Populate Data');
-			this.populate();
+			console.log('App Started, You can populate todos to get started....');
+			this.displayTodos();
+			// this.populate();
 		},
 		populate: function() {
 			var initialBoolValue = false;
 			var todoCount = this.getTodoCount();
 			
-			for (var i = todoCount; i < todoCount + 6; i++) {
+			for (var i = todoCount; i < todoCount + 5; i++) {
 				initialBoolValue = !initialBoolValue;
 				var newTodoObject = {
 					text: 'Todo number ' + i,
@@ -24,14 +24,17 @@
 		},
 		displayTodos: function() {
 
+			console.clear();
 			var todoListUl = document.getElementById('todoListUl');
 			var toggleAllTodosButton = document.getElementById('toggleAllTodosButton');
-			
+			var clearAllTodosButton = document.getElementById('deleteAllTodosButton');
+
 			todoListUl.innerHTML = '';
-			console.clear();
 
 			if (this.todos.length) {
 				toggleAllTodosButton.removeAttribute('disabled');
+				clearAllTodosButton.removeAttribute('disabled');
+
 				this.todos.forEach(function displayingTodo(todo, index) {
 
 					var li = document.createElement('li');
@@ -47,6 +50,7 @@
 				});
 			} else {
 				toggleAllTodosButton.setAttribute('disabled','disabled');
+				clearAllTodosButton.setAttribute('disabled','disabled');
 				console.log('There are no todos');
 			}
 		},
@@ -54,11 +58,17 @@
 			return this.todos.length;
 		},
 		addTodo: function(todoText) {
+
+			var newTodoField = document.getElementById('newTodoText');
+			var newTodoText = newTodoField.value;
+
 			var newTodo = {
-				text: todoText,
+				text: newTodoText,
 				isCompleted: false
 			};
 			this.todos.push(newTodo);
+			newTodoField.value = '';
+			newTodoField.focus();
 			this.displayTodos();
 		},
 		changeTodo: function(position, todoText, isCompleted) {
@@ -109,9 +119,9 @@
 	window.App = App;
 	window.App.init();
 
-	// Display Todos on button click
-	var displayTodosButton = document.getElementById("addTodosButton");
-	addTodosButton.addEventListener("click", function() { App.populate(); }, false);
+	// Populate Todos on button click
+	var populateTodosButton = document.getElementById("populateTodosButton");
+	populateTodosButton.addEventListener("click", function() { App.populate(); }, false);
 
 	// Toggle All on button click
 	var ToggleAllTodosButton = document.getElementById("toggleAllTodosButton");
@@ -121,6 +131,9 @@
 	var deleteAllTodosButton = document.getElementById("deleteAllTodosButton");
 	deleteAllTodosButton.addEventListener("click", function() { App.deleteAllTodos(); }, false);
 
+	// Add new todo
+	var newTodoButton = document.getElementById	('newTodoButton');
+	newTodoButton.addEventListener('click', function() { App.addTodo() }, false );
 })();
 
 
