@@ -13,25 +13,25 @@
 			var todoCount = this.getTodoCount();
 			
 			for (var i = todoCount; i < todoCount + 6; i++) {
-
 				initialBoolValue = !initialBoolValue;
-
 				var newTodoObject = {
 					text: 'Todo number ' + i,
 					isCompleted: !initialBoolValue
 				};
 				this.todos.push(newTodoObject);	
 			}
-			this.displayTodos();
-			
+			this.displayTodos();			
 		},
 		displayTodos: function() {
+
+			var todoListUl = document.getElementById('todoListUl');
+			var toggleAllTodosButton = document.getElementById('toggleAllTodosButton');
+			
+			todoListUl.innerHTML = '';
+			console.clear();
+
 			if (this.todos.length) {
-				var todoListUl = document.getElementById('todoListUl');
-
-				todoListUl.innerHTML = '';
-				console.clear();
-
+				toggleAllTodosButton.removeAttribute('disabled');
 				this.todos.forEach(function displayingTodo(todo, index) {
 
 					var li = document.createElement('li');
@@ -44,9 +44,9 @@
 						console.log('[   ] - ' + todo.text);
 					}
 					todoListUl.appendChild(li);
-
 				});
 			} else {
+				toggleAllTodosButton.setAttribute('disabled','disabled');
 				console.log('There are no todos');
 			}
 		},
@@ -106,22 +106,20 @@
 		}
 	};
 
-	function modifyText() {
-		alert('hi');
-	}
-
 	window.App = App;
 	window.App.init();
 
 	// Display Todos on button click
-	var displayTodosButton = document.getElementById("displayTodosButton");
-	displayTodosButton.addEventListener("click", function() { App.displayTodos(); }, false);
+	var displayTodosButton = document.getElementById("addTodosButton");
+	addTodosButton.addEventListener("click", function() { App.populate(); }, false);
 
 	// Toggle All on button click
-
 	var ToggleAllTodosButton = document.getElementById("toggleAllTodosButton");
 	ToggleAllTodosButton.addEventListener("click", function() { App.toggleAll(); }, false);
 
+	// Clear all todos
+	var deleteAllTodosButton = document.getElementById("deleteAllTodosButton");
+	deleteAllTodosButton.addEventListener("click", function() { App.deleteAllTodos(); }, false);
 
 })();
 
