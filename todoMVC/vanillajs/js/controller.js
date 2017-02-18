@@ -100,18 +100,8 @@
 		}
 
 		self.model.create(title, function () {
-			console.log(self);
-
-			if(self._lastActiveRoute === 'Completed') {
-
-				self.setView('sdfsdf');
-				self._activeRoute = 'Active';
-			}
 			self.view.render('clearNewTodo');
 			self._filter(true);
-
-
-
 		});
 	};
 
@@ -270,6 +260,7 @@
 		}
 
 		this._filter();
+
 		this.view.render('setFilter', currentPage);
 	};
 
