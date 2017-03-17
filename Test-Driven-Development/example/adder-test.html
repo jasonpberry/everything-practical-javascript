@@ -1,0 +1,155 @@
+<html>
+  <head>
+
+    <script src="../tinytest.js"></script>
+    <script>
+
+// TESTS TESTS TESTS TESTS TESTS 
+
+// Example #1
+// forEach([1,2,3], function() {
+// 	console.log('hi');
+// });
+
+// Example #2
+// forEach([1,2,3,4], function(number) {
+// console.log(number);
+// });
+
+// REAL FUNCTION:
+
+// the array
+  // The initial Array to loop over
+// callback
+    // Function to execute for each element, taking three arguments:
+// currentValue
+    // The current element being processed in the array.
+// index
+    // The index of the current element being processed in the array.
+// array
+    // The array that forEach() is being applied to.
+// thisArg Optional
+    // Value to use as this(i.e reference Object) when executing callback.
+
+
+function forEach(array, callback, configurableThis) {
+  if(configurableThis) {
+    callback = callback.bind(configurableThis);
+  }
+  for(var i = 0; i < array.length; i++) {
+    callback(array[i], i, array);        
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+    tests({
+
+      /*  ------------------------------------------------------------------- */
+      /* TEST : 'It should run the callback function array.length times.'
+      /*  ------------------------------------------------------------------- */
+
+      'It should run the callback function array.length times.' : 
+        function() {         
+
+          var numTimesCallBackRan = 0;
+          forEach([1,2,3], function() {
+            numTimesCallBackRan++;
+          });
+          eq(3, numTimesCallBackRan);
+
+      }
+      
+      /*  ------------------------------------------------------------------- */
+      /* TEST : 'It should pass in the iTH element as the first argument to the callback '
+      /*  ------------------------------------------------------------------- */
+
+      ,'It should pass in the iTH element as the first argument to the callback ' : 
+        function() {  
+
+          forEach([2], function(number) {
+            eq(number, 2);
+          });
+
+        }
+
+      /*  ------------------------------------------------------------------- */
+      /*  ------------------------------------------------------------------- */
+
+
+      ,'It should pass in the iTh position as the second argument in the callback ' : 
+        function() {  
+
+          forEach([1], function(number, currentIndex) {
+            eq(currentIndex,0);
+          });
+
+        }
+
+      /*  ------------------------------------------------------------------- */
+      /*  ------------------------------------------------------------------- */
+
+      ,'It should Pass in the original array  as the 3rd argument in the callback' : 
+        function() {  
+
+          var myArray = [0,1,2,3];
+          forEach(myArray, function(number, currentIndex, originalArray) {
+            eq(myArray,originalArray);
+          });
+        }
+
+      /*  ------------------------------------------------------------------- */
+      /*  ------------------------------------------------------------------- */
+
+
+      ,'It should pass in a configurable this':
+      function() {
+
+        forEach([0], function() {
+          eq(this.description, 'I should be accessible within the callback');
+        }, {description: 'I should be accessible within the callback'});
+      }
+
+
+      /*  ------------------------------------------------------------------- */
+      /*  ------------------------------------------------------------------- */
+
+      // ,'Fail Demo':       
+      // function() {
+      //   fail();
+      // }
+
+      // ,'Fail Demo':       
+      // function() {
+      //   fail();
+      // }
+
+      // ,'Fail Demo':       
+      // function() {
+      //   fail();
+      // }
+
+      // ,'Fail Demo':       
+      // function() {
+      //   fail();
+      // }
+
+    });
+
+    </script>
+  </head>
+  <body>
+
+    <div id="main"></div>
+  </body>
+</html>
+
