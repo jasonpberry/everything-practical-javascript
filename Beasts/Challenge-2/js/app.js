@@ -63,6 +63,9 @@ jQuery(function ($) {
 				.on('focusout', '.edit', this.update.bind(this))
 				.on('click', '.destroy', this.destroy.bind(this));
 		},
+		storeData: function() {
+			util.store('todos-jquery', this.todos);
+		},
 		render: function () {
 			var todos = this.getFilteredTodos();
 			$('#todo-list').html(this.todoTemplate(todos));
@@ -91,7 +94,7 @@ jQuery(function ($) {
 			});
 
 			this.render();
-			util.store('todos-jquery', this.todos);
+			this.storeData();
 		},
 		getActiveTodos: function () {
 			return this.todos.filter(function (todo) {
@@ -118,7 +121,7 @@ jQuery(function ($) {
 			this.todos = this.getActiveTodos();
 			this.filter = 'all';
 			this.render();
-			util.store('todos-jquery', this.todos);
+			this.storeData();
 		},
 		// accepts an element from inside the `.item` div and
 		// returns the corresponding index in the `todos` array
@@ -150,13 +153,13 @@ jQuery(function ($) {
 			$input.val('');
 
 			this.render();
-			util.store('todos-jquery', this.todos);
+			this.storeData();
 		},
 		toggle: function (e) {
 			var i = this.indexFromEl(e.target);
 			this.todos[i].completed = !this.todos[i].completed;
 			this.render();
-			util.store('todos-jquery', this.todos);
+			this.storeData();
 		},
 		edit: function (e) {
 			var $input = $(e.target).closest('li').addClass('editing').find('.edit');
@@ -188,12 +191,12 @@ jQuery(function ($) {
 			}
 
 			this.render();
-			util.store('todos-jquery', this.todos);			
+			this.storeData();			
 		},
 		destroy: function (e) {
 			this.todos.splice(this.indexFromEl(e.target), 1);
 			this.render();
-			util.store('todos-jquery', this.todos);
+			this.storeData();
 		}
 	};
 
